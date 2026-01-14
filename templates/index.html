@@ -4,13 +4,13 @@
   <div class="space-y-2">
     <p class="text-xs uppercase tracking-[0.3em] text-emerald-300">College Football</p>
     <h1 class="text-3xl font-semibold tracking-tight text-white">Prove Team A &gt; Team B (transitively)</h1>
-    <p class="max-w-2xl text-sm text-slate-300"> Settle arguments about the superior college football team via liberal application of the transitive property</p>
+    <p class="max-w-2xl text-sm text-slate-300"> Settle arguments about the superior college football team via the transitive property, time machines, and the power of generative AI</p>
   </div>
 
   <form id="path-form" class="grid gap-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4 shadow-lg shadow-slate-950/40 md:grid-cols-[1fr_auto_1fr] md:items-end">
     <label class="space-y-1 text-sm font-medium text-slate-200">
       Team A (claims superiority)
-      <input id="team-a" name="team_a" list="team-list" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-base text-white outline-none ring-emerald-500/40 focus:border-emerald-400 focus:ring" placeholder="e.g., Georgia" required>
+      <input id="team-a" name="team_a" list="team-list" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-base text-white outline-none ring-emerald-500/40 focus:border-emerald-400 focus:ring" placeholder="e.g., Centre College Kentucky" required>
     </label>
 
     <div class="flex items-center justify-center">
@@ -124,7 +124,22 @@
           </span>
         </summary>
         <div class="mt-2 pl-6 text-slate-300">
-          If the algorithm can't find any chain of victories connecting two teams, it means there's no transitive relationship in the available data (covering seasons 2020–2025). This typically happens when teams play in completely separate divisions or conferences with no common opponents.
+          <p class="mb-2"> In exceedingly rare cases, no transitive path of victories can be found between two teams, even after applying persistence. When this occurs, QEDSports leverages the power of generative AI to provide a convincing argument for why Team A 
+          is better than Team B. You may ask: "What criteria is used when picking between teams?" The answer is simple- which mascot would win in a fight. This metric is underutilized 
+          by the sports analytics community, and we are proud to champion its use here at QEDSports. </p>
+          <p class="mb-4 text-xs uppercase tracking-widest text-slate-500">Example:</p>
+          <div class="space-y-3">
+            <div class="flex justify-start">
+              <div class="max-w-xs rounded-lg bg-emerald-600/30 px-4 py-2 text-slate-200">
+                <p class="text-sm">Why would Georgia defeat Tufts?</p>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="max-w-xs rounded-lg bg-blue-600/30 px-4 py-2 italic text-slate-300">
+                <p class="text-sm">The Georgia Bulldogs mascot, Uga, would dominate in a direct confrontation with Tufts' Jumbo mascot. The sheer size and ferocity of a bulldog compared to an elephant in a hypothetical combat scenario...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </details>
 

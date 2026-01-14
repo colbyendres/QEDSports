@@ -12,9 +12,34 @@ function setStatus(message, tone = "info") {
     info: "text-slate-400",
     error: "text-rose-400",
     success: "text-emerald-300",
+    fallback: "text-amber-400",
   };
   statusEl.textContent = message || "";
   statusEl.className = `text-sm ${toneMap[tone] ?? toneMap.info}`;
+}
+
+function renderLLMExplanation(fromTeam, toTeam, explanation, fromLogo, toLogo) {
+  pathListEl.innerHTML = "";
+  
+  // Update description
+  const descEl = document.getElementById("results-description");
+  if (descEl) {
+    descEl.textContent = `Why ${fromTeam} would beat ${toTeam}`;
+  }
+
+  const li = document.createElement("li");
+  li.className = "rounded-lg border border-emerald-700/50 bg-emerald-950/40 px-4 py-3";
+  li.innerHTML = `
+    <div class="flex items-center gap-3">
+      ${fromLogo ? `<img src="${fromLogo}" alt="${fromTeam}" class="h-12 w-12 flex-shrink-0 object-contain" />` : ''}
+      <div class="flex-1">
+        <p class="text-sm text-slate-300 italic">${explanation}</p>
+      </div>
+      ${toLogo ? `<img src="${toLogo}" alt="${toTeam}" class="h-12 w-12 flex-shrink-0 object-contain" />` : ''}
+    </div>
+  `;
+  pathListEl.appendChild(li);
+  resultsEl.classList.remove("hidden");
 }
 
 function renderPath(path, edges) {
@@ -36,10 +61,6 @@ function renderPath(path, edges) {
     const li = document.createElement("li");
     // Check if the label contains a year in parentheses (indicating a past season game)
     const isPastSeason = /\(\d{4}\)/.test(edge.label);
-    const isFinalGame = idx === edges.length - 1;
-    if (isFinalGame) {
-        li.className = "rounded-lg border border-slate-800 bg-amber-500/90 px-3 py-2";
-    }
     if (isPastSeason) {
       li.className = "rounded-lg border border-slate-700 bg-slate-900/40 px-3 py-2 opacity-75";
     }
@@ -84,8 +105,16 @@ async function handleSubmit(event) {
       return;
     }
 
-    renderPath(data.path, data.edges);
-    setStatus(`Found a chain with ${data.edges.length} step(s).`, "success");
+    if (data.llm_text) {
+      const fromLogo = data.edges && data.edges.length > 0 ? data.edges[0].fromLogo : null;
+      const toLogo = data.edges && data.edges.length > 0 ? data.edges[0].toLogo : null;
+      renderLLMExplanation(from, to, data.llm_text, fromLogo, toLogo);
+      setStatus("Generated explanation (no transitive path found)", "fallback");
+    }
+    else {
+        renderPath(data.path, data.edges);
+        setStatus(`Found a chain with ${data.edges.length} step(s)`, "success");
+    }
   } catch (err) {
     console.error(err);
     setStatus("Something went wrong. Try again.", "error");
