@@ -61,10 +61,6 @@ function renderPath(path, edges) {
     const li = document.createElement("li");
     // Check if the label contains a year in parentheses (indicating a past season game)
     const isPastSeason = /\(\d{4}\)/.test(edge.label);
-    const isFinalGame = idx === edges.length - 1;
-    if (isFinalGame) {
-        li.className = "rounded-lg border border-slate-800 bg-amber-500/90 px-3 py-2";
-    }
     if (isPastSeason) {
       li.className = "rounded-lg border border-slate-700 bg-slate-900/40 px-3 py-2 opacity-75";
     }
