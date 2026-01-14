@@ -13,7 +13,7 @@ QEDSports relies on advanced elementary school math, namely the transitive prope
 giving you ample evidence to believe that your team can beat anyone.
 
 ### The Role of History
-The astute reader will likely point out the above approach will fail against undefeated teams. After all, if a team has no losses, there certainly won't be any paths towards them. This is no problem for QEDSports. When no path exists within the current season, the app steps back in time to find games from prior years. Games from past seasons are visually distinguished (faded and muted) so you can quickly see which parts of the chain rely on historical results. This approach, which we call **persistence**, assumes that if Team A defeated Team B in a previous season, that superiority likely persists. Given the [https://www.cbssports.com/college-football/news/college-footballs-transfer-portal-has-spun-out-of-control/](current stability) of college rosters, we believe this affirms our conclusions
+The astute reader will likely point out the above approach will fail against undefeated teams. After all, if a team has no losses, there certainly won't be any paths towards them. This is no problem for QEDSports. When no path exists within the current season, the app steps back in time to find games from prior years. Games from past seasons are visually distinguished (faded and muted) so you can quickly see which parts of the chain rely on historical results. This approach, which we call **persistence**, assumes that if Team A defeated Team B in a previous season, that superiority likely persists. Given the [current stability](https://www.cbssports.com/college-football/news/college-footballs-transfer-portal-has-spun-out-of-control) of college rosters, we believe this affirms our conclusions
 about persistence.
 
 ## Setup
@@ -38,8 +38,6 @@ about persistence.
 ```bash
 flask run
 ```
-
-Then open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
 
 
 ## Regenerating the Graph
