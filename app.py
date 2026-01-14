@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, render_template, request
 from werkzeug.middleware.proxy_fix import ProxyFix
-from routes import GraphService, GRAPH_PATH
+from graph_service import GraphService
+from config import Config
+import os
 
 def create_app() -> Flask:
 	app = Flask(__name__)
 	app.wsgi_app = ProxyFix(app.wsgi_app)  # type: ignore[assignment]
 
-	graph_service = GraphService(GRAPH_PATH)
+	graph_service = GraphService(Config.GRAPH_PATH, Config.TEAMS_PATH)
 
 	@app.route("/")
 	def home():
@@ -31,4 +33,5 @@ app = create_app()
 
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", port=5000, debug=True)
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host="0.0.0.0", port=port)
