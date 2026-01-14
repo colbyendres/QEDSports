@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="space-y-6">
+  <div class="space-y-2">
+    <p class="text-xs uppercase tracking-[0.3em] text-emerald-300">College Football</p>
+    <h1 class="text-3xl font-semibold tracking-tight text-white">Prove Team A &gt; Team B (transitively)</h1>
+    <p class="max-w-2xl text-sm text-slate-300"> Settle arguments about the superior college football team via liberal application of the transitive property</p>
+  </div>
+
+  <form id="path-form" class="grid gap-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4 shadow-lg shadow-slate-950/40 md:grid-cols-[1fr_auto_1fr] md:items-end">
+    <label class="space-y-1 text-sm font-medium text-slate-200">
+      Team A (claims superiority)
+      <input id="team-a" name="team_a" list="team-list" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-base text-white outline-none ring-emerald-500/40 focus:border-emerald-400 focus:ring" placeholder="e.g., Georgia" required>
+    </label>
+
+    <div class="flex items-center justify-center">
+      <button type="button" id="swap" class="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 shadow hover:border-emerald-400 hover:text-white">Swap</button>
+    </div>
+
+    <label class="space-y-1 text-sm font-medium text-slate-200">
+      Team B (must yield)
+      <input id="team-b" name="team_b" list="team-list" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-base text-white outline-none ring-emerald-500/40 focus:border-emerald-400 focus:ring" placeholder="e.g., Alabama" required>
+    </label>
+
+    <div class="md:col-span-3 flex flex-wrap items-center gap-3 pt-2">
+      <button type="submit" class="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-950 shadow-lg shadow-emerald-500/30 hover:bg-emerald-400">Find Path</button>
+      <p id="status" class="text-sm text-slate-400"></p>
+    </div>
+  </form>
+
+  <datalist id="team-list">
+    {% for name in team_names %}
+    <option value="{{ name }}"></option>
+    {% endfor %}
+  </datalist>
+
+  <section id="results" class="hidden space-y-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4 shadow-lg shadow-slate-950/40">
+    <div>
+      <h2 class="text-lg font-semibold text-white">Path to Victory</h2>
+      <p id="results-description" class="text-sm text-slate-400">Shortest chain of victories from Team A to Team B.</p>
+    </div>
+    <ol id="path-list" class="space-y-2 text-sm text-slate-200"></ol>
+  </section>
+
+  <section class="space-y-4 rounded-xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+    <div>
+      <h2 class="text-xl font-semibold text-white">How It Works</h2>
+      <p class="text-sm text-slate-400">Understanding our ironclad decision making</p>
+    </div>
+
+    <div class="space-y-4 text-sm">
+        <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            Why does QEDSports exist?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+            College football is rife with heated debates about which team is truly the best. Fans often rely on subjective opinions, biased statistics, or plain 
+            supposition to back up their claims. QED (Quasi-Empirical Decisions) Sports was created to provide a clear, objective method for determining team superiority 
+            using the transitive property of victories.
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            What's the transitive property?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+          The transitive property states that if Team A beats Team B, and Team B beats Team C, then Team A must be better than Team C. This process can be repeated ad infinitum with no issue. QEDSports finds the shortest chain of victories connecting any two teams, providing mathematical backing to claims of superiority.
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            How can an undefeated team be beaten?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+            Arguing against undefeated teams is no problem for QEDSports. We rely on a special technique called <strong> persistence </strong> to explain why your team will be able to break the streak.
+        </div>
+      </details>
+
+        <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            What's this about persistence?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+            <p class="mb-2"> Persistence is a tried-and-true method of weather forecasting. If it was sunny today, then it will certainly be sunny tomorrow. This logic can be seamlessly applied to college football.</p>
+            
+            <p class="mb-2"> As we all know, players and coaching staff tend to remain on the team that recruited them. Frequent transfers betweem institutions hamper academic progress, a high priority for every student-athlete. 
+            With all of their core pieces intact, the quality of a team remains the same year-over-year. This aligns with our understanding of perennial powerhouses and underperformers. A team that only won three games, for instance,
+            is destined to be a bottom-dweller in their division for years to come. Suggesting that said team could turn it around and compete for a national 
+            championship in only two years is <a class="text-sky-500" href="https://iuhoosiers.com/sports/football/schedule/2023"> utter nonsense</a>. </p>
+            
+            <p class="mb-2"> The logical conclusion of this is that if Team A defeated Team B last year, persistence says that the result will be the same this year. QEDSports makes full use of persistence when creating the path to victory. Should your team have no path within the confines of the current season, QEDSports will step back in time 
+            to give you the evidence you need. </p>
+      </details>
+
+      <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            What if no path exists?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+          If the algorithm can't find any chain of victories connecting two teams, it means there's no transitive relationship in the available data (covering seasons 2020–2025). This typically happens when teams play in completely separate divisions or conferences with no common opponents.
+        </div>
+      </details>
+
+      <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            Where does the data come from?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+          Game results and team information are sourced from the College Football Data API. The graph is precomputed from seasons 2020 through 2025, capturing tens of thousands of games across all divisions of college football.
+        </div>
+      </details>
+
+        <details class="group">
+        <summary class="cursor-pointer list-none font-medium text-slate-200 hover:text-emerald-300">
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            How can I learn more?
+          </span>
+        </summary>
+        <div class="mt-2 pl-6 text-slate-300">
+            QEDSports draws inspiration from <a class="text-sky-500" href="https://myteamisbetterthanyourteam.com"> My Team Is Better Than Your Team</a>, which uses similar ranking principles. For those wishing to dive deeper or contribute to QEDSports,
+            the source code is available on <a class="text-sky-500" href="https://github.com/colbyendres/QEDSports"> GitHub</a>.
+      </details>
+    </div>
+  </section>
+</section>
+{% endblock %}
