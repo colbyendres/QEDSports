@@ -48,8 +48,6 @@ In the exceedingly rare case where no transitive path can be found, even after a
 flask run
 ```
 
-Then open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
-
 
 ## Regenerating the Graph
 
