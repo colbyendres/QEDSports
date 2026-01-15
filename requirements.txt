@@ -2,3 +2,4 @@ flask
 gunicorn
 networkx
 python-dotenv
+google-genai
