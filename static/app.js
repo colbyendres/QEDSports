@@ -39,6 +39,17 @@ function renderLLMExplanation(fromTeam, toTeam, explanation, fromLogo, toLogo) {
     </div>
   `;
   pathListEl.appendChild(li);
+  
+  // Separate QED <li> with a special style
+  const qedLi = document.createElement("li");
+  qedLi.className = "px-4 py-3";
+  qedLi.innerHTML = `
+    <div class="flex items-center gap-3">
+      <div class="flex-1 text-emerald-400 text-right text-lg font-serif tracking-wide"> Q.E.D.</div>
+    </div>
+  `;
+  pathListEl.appendChild(qedLi);
+
   resultsEl.classList.remove("hidden");
 }
 
@@ -76,6 +87,16 @@ function renderPath(path, edges) {
     `;
     pathListEl.appendChild(li);
   });
+
+  // Separate QED <li> with a special style
+  const qedLi = document.createElement("li");
+  qedLi.className = "px-4 py-3";
+  qedLi.innerHTML = `
+    <div class="flex items-center gap-3">
+      <div class="flex-1 text-emerald-400 text-right text-lg font-serif tracking-wide"> Q.E.D.</div>
+    </div>
+  `;
+  pathListEl.appendChild(qedLi);
 
   resultsEl.classList.remove("hidden");
 }
@@ -115,6 +136,7 @@ async function handleSubmit(event) {
         renderPath(data.path, data.edges);
         setStatus(`Found a chain with ${data.edges.length} step(s)`, "success");
     }
+
   } catch (err) {
     console.error(err);
     setStatus("Something went wrong. Try again.", "error");
