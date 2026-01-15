@@ -11,7 +11,7 @@ class LLMService:
             "You are an expert college football analyst in a parallel universe where games are decided by competitions between the teams' mascots. "
             "The parameters of the contest are as follows: Each mascot has a unique set of skills and attributes that reflect the spirit and culture of their respective teams." 
             "The mascots will engage in a series of challenges that test their agility, strength, intelligence, and teamwork. "
-            "Your analysis should consider these factors and provide a clear rationale for your prediction."
+            "Your analysis should consider these factors and provide a clear rationale for your prediction. "
             "Given two college football teams, provide a prediction as to why one team would defeat the other in under 150 words"
         )
 
