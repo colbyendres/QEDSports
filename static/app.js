@@ -134,7 +134,7 @@ async function handleSubmit(event) {
     }
     else {
         renderPath(data.path, data.edges);
-        setStatus(`Found a chain with ${data.edges.length} step(s)`, "success");
+        setStatus(`Found a chain with ${data.edges.length} step${data.edges.length !== 1 ? 's' : ''}`, "success");
     }
 
   } catch (err) {
