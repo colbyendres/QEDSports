@@ -54,7 +54,7 @@ flask run
 The `get_games.ipynb` notebook fetches recent seasons from the College Football Data API and generates both `graph.gexf` and `teams.pkl`. To refresh the data when new games are available:
 
 1. Obtain an API key from [collegefootballdata.com](https://collegefootballdata.com)
-2. Set your `CFB_API_KEY` as an environment variable (i.e `echo CFB_API_KEY=your-api-key >> .env`)
+2. Set your `CFB_API_KEY` as an environment variable (i.e `echo "CFB_API_KEY=your-api-key" >> .env`)
 3. Run the notebook
 4. The precomputed graph will be updated with the latest results
 
