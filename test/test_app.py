@@ -1,5 +1,7 @@
 """Tests for Flask app routes and API."""
+
 from unittest.mock import patch
+
 
 class TestFlaskApp:
     """Test suite for Flask app routes."""
@@ -67,14 +69,15 @@ class TestFlaskApp:
     def test_api_path_no_path_with_llm(self, client, monkeypatch, mock_llm_service):
         """Test API path endpoint with LLM fallback."""
         monkeypatch.setattr("config.Config.GEMINI_API_KEY", "test-key")
-        
+
         # Recreate app with mocked LLM
         with patch("graph_service.LLMService", return_value=mock_llm_service):
             from app import create_app
+
             test_app = create_app()
             test_app.config["TESTING"] = True
             test_client = test_app.test_client()
-            
+
             payload = {"from": "Alabama", "to": "Tufts"}
             rsp = test_client.post(
                 "/api/path",

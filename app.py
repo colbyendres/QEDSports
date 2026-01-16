@@ -25,7 +25,13 @@ def create_app() -> Flask:
         if result.error:
             return jsonify({"error": result.error}), 400
 
-        return jsonify({"path": result.path_names, "edges": result.edges, "llm_text": result.llm_text})
+        return jsonify(
+            {
+                "path": result.path_names,
+                "edges": result.edges,
+                "llm_text": result.llm_text,
+            }
+        )
 
     return app
 

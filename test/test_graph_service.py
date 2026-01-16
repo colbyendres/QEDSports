@@ -1,4 +1,5 @@
 """Tests for GraphService."""
+
 from unittest.mock import patch
 
 import pytest
@@ -111,7 +112,7 @@ class TestGraphService:
         """Test that historical games (with years) are included in paths."""
         service = GraphService(temp_graph_file, temp_teams_file)
         result = service.find_path("Georgia", "Alabama")
-        
+
         assert result.error is None
         assert result.path_names == ["Georgia", "Auburn", "Alabama"]
         assert len(result.edges) == 2

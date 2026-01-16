@@ -1,15 +1,17 @@
 """Fixtures for testing."""
+
 import pickle
 from unittest.mock import MagicMock
 
 import networkx as nx
 import pytest
 
+
 @pytest.fixture
 def mock_graph():
     """Create a small test graph with known structure."""
     graph = nx.DiGraph()
-    
+
     # Add nodes with labels
     nodes = {
         "0": "Alabama",
@@ -20,18 +22,18 @@ def mock_graph():
     }
     for node_id, label in nodes.items():
         graph.add_node(node_id, label=label)
-    
+
     # Add edges with weights and labels
     # Current season games (high weight priority)
     graph.add_edge("0", "1", weight=1, label="Alabama def. Georgia")
     graph.add_edge("1", "2", weight=1, label="Georgia def. Auburn")
     graph.add_edge("2", "3", weight=1, label="Auburn def. Vanderbilt")
-    
+
     # Historical games (lower weight priority)
     graph.add_edge("2", "0", weight=2025, label="Auburn def. Alabama (2024)")
-    
+
     # Tufts is isolated (no path exists)
-    
+
     return graph
 
 
@@ -115,7 +117,8 @@ def mock_llm_service():
 def mock_config(monkeypatch):
     """Mock the Config class."""
     monkeypatch.setattr("config.Config.GEMINI_API_KEY", "test-key")
-    
+
+
 @pytest.fixture
 def app(temp_graph_file, temp_teams_file, monkeypatch):
     """Create a test Flask app."""
@@ -124,9 +127,9 @@ def app(temp_graph_file, temp_teams_file, monkeypatch):
     monkeypatch.setattr("config.Config.GRAPH_PATH", temp_graph_file)
     monkeypatch.setattr("config.Config.TEAMS_PATH", temp_teams_file)
     monkeypatch.setattr("config.Config.GEMINI_API_KEY", None)
-    
+
     from app import create_app
-    
+
     test_app = create_app()
     test_app.config["TESTING"] = True
     return test_app
