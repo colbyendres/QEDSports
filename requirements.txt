@@ -3,3 +3,5 @@ gunicorn
 networkx
 python-dotenv
 google-genai
+pytest
+pytest-cov

@@ -54,7 +54,10 @@ class GraphService:
         # Initialize LLM service for fallback explanations
         self._llm_service = LLMService(
             Config.GEMINI_API_KEY) if Config.GEMINI_API_KEY else None
-
+        
+    def get_num_teams(self) -> int:
+        return len(self._id_to_name)
+    
     def find_path(self, start_name: str, end_name: str) -> PathResult:
         key_a = (start_name or "").strip().lower()
         key_b = (end_name or "").strip().lower()
